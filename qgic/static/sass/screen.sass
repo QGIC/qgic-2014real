@@ -1,0 +1,303 @@
+@import compass/reset
+@import compass/css3
+
+@import _variables
+@import _mixins
+@import _type
+@import _icons
+// @import "team/*.jpg"
+
+.header-nav
+  position: fixed
+  z-index: 2
+  top: 0
+  width: 100%
+  background: $fill
+  $collapse-transition: 0.4s linear
+
+  .header-nav-content
+    @include inliner
+    max-width: $container
+    margin: 0 auto
+    position: relative
+
+  h1
+    padding: 0.333em 0
+    @include transition(all $collapse-transition)
+    a
+      color: $accent
+    .word
+      display: inline-block
+      padding-right: 0.3em
+      &.nospace
+        padding-right: 0
+      max-width: 5em
+      @include transition(all $collapse-transition)
+  
+  nav, .nav-register
+    @include box-sizing(border-box)
+    max-width: 0
+    overflow: hidden
+    @include transition(max-width, $collapse-transition)
+    white-space: nowrap
+
+    li::before
+      content: "/ "
+      color: $alt-fill
+      margin-left: 1em
+
+  .nav-register
+    position: absolute
+    max-width: 100%
+    opacity: 0
+    top: 0.333em
+    right: 0
+
+  &.collapsed
+    padding: 0.2em 0 0.5em
+    h1
+      font-size: 1.2em
+      .word
+        padding-right: 0
+        max-width: 0
+        overflow: hidden
+    nav, .nav-register
+      overflow: visible
+      max-width: 100%
+    .nav-register
+      @include register-button($fill, 1em, 0.2em, 0.5)
+
+
+.section
+  position: relative
+  z-index: 1
+  padding: 3em 1em 2em
+
+.section-body
+  max-width: $container
+  margin: 0 auto
+
+
+#section-top
+  background: $fill url('../img/section-top-bg.jpg') 50%
+  background-size: cover
+  color: $alt-fill
+
+  .section-top-content
+    width: 50%
+
+    h2
+      font-family: $caps
+      margin: 1em 0
+      font-size: 3em
+      font-weight: bold
+      span
+        @include stripe($fill, $alt-fill)
+
+    .section-top-register-button
+      @include register-button($accent, 2em, 0.333em, 0.2)
+      margin: 2em 0
+
+  .section-bottom-bar .social a
+    margin-right: 2em
+
+
+#section-about
+  background: #ddd
+  border-bottom: 1px dashed #fff
+
+  blockquote
+    color: $link
+    cite
+      color: $link
+
+  .doing
+    position: relative
+    padding: 0 1rem 1rem
+    border-left: 4rem solid $link
+    &:before
+      content: ""
+      display: block
+      position: absolute
+      z-index: 1
+      top: 0
+      left: -4rem
+      bottom: 0
+      width: 4rem
+      background-size: cover
+
+    &.collabs
+      &:before
+        background: url('../img/hands.png') 50% 30%
+        background-size: cover
+    &.systems
+      border-color: $accent
+      &:before
+        background: url('../img/pcb.png') 50% 30%
+      blockquote
+        color: $accent
+        cite
+          color: $accent
+    &.leaders
+      &:before
+        background: url('../img/crowd-overhead.png') 80%
+
+  h4.big
+    position: relative
+    z-index: 2
+    margin: 0 0 0 -4rem
+    line-height: 1em
+    font: bold 4em $caps
+    text-transform: uppercase
+    letter-spacing: -5px
+    color: #fff
+    text-shadow: 0 0 2px #333
+
+
+#section-delegates
+  .delegates-register
+    @include register-button($fill, 1.5em, 0.333em, 0.2)
+    margin: 4em 0 2em
+    text-align: center
+
+  .text
+    +box-sizing
+    float: left
+    width: 33%
+    padding-right: 1em
+  .people
+    float: left
+    width: 66%
+    margin: -2em 0 2em
+    .speaker
+      display: block
+      height: 64px
+      color: white
+      border-bottom: none
+      position: relative
+      h4
+        margin-top: 0.2em
+        padding-top: 0.5em
+        transition: padding 0.2s ease
+      h4,
+      p
+        padding-left: 1em
+        padding-right: 1em
+      transition: background-color 0.15s linear
+      &:after
+        content: ""
+        opacity: 0.8
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        position: absolute
+        transition: opacity 0.15s linear
+      &:hover
+        h4
+          padding-left: 1.5em
+          padding-right: 1.5em
+        &:after
+          opacity: 1
+
+      &.dwyer
+        text-align: right
+        background-color: lighten($accent, 10%)
+        &:hover
+          background-color: $accent
+        &:after
+          background: url('../img/speakers.jpg') top left no-repeat
+
+      &.alajek
+        background-color: lighten($link, 10%)
+        &:hover
+          background-color: $link
+        p
+          text-align: right
+        &:after
+          background: url('../img/speakers.jpg') 50% no-repeat
+
+      &.slomp
+        background: lighten($accent, 10%)
+        &:hover
+          background-color: $accent
+        &:after
+          background: url('../img/speakers.jpg') bottom right no-repeat
+
+
+
+#section-sponsors
+  background: $accent
+  color: #fff
+  em
+    color: $fill
+  a
+    color: $fill
+    border-color: $fill
+    &:hover
+      background: rgba(255, 255, 255, 0.2)
+  .feature
+    margin: 1em auto
+    a
+      border-width: 0
+    img
+      padding: 0.2em
+      background: rgba(255, 255, 255, 0.2)
+      margin: 1em
+      vertical-align: middle
+      border-width: 0
+    .linked
+      font-weight: bold
+      border-bottom: 1px dashed $fill
+      margin-right: 1em
+    @media (max-width: 480px)
+      img,
+      span
+        display: block
+
+
+#section-team
+  background: $fill
+  color: $alt-fill
+  .team-members li
+    display: inline-block
+    vertical-align: top
+    width: 12em
+    position: relative
+    height: 12em
+    line-height: 12em
+    overflow: hidden
+    address
+      line-height: 1em
+    .team-name, .team-role
+      margin: 0
+      position: absolute
+      background: rgba(0, 0, 0, 0.667)
+    .team-name
+      top: -2em
+      left: 0
+      padding: 0.25em
+      transition: top 0.2s ease-out
+    .team-bio
+      display: none
+    .team-pic
+      width: 100%
+    .team-role
+      bottom: -3em
+      width: 100%
+      text-align: center
+      transition: bottom 0.2s ease-out
+    .team-address
+      display: none
+    &:hover
+      .team-name
+        top: 0
+      .team-role
+        bottom: 0
+
+    // &.olga
+    //   @include teamp-sprite(olga)
+
+
+.clearfix
+  clear: both
